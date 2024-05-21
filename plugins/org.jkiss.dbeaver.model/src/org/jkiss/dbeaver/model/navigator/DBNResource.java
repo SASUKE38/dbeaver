@@ -253,18 +253,18 @@ public class DBNResource extends DBNNode implements DBNNodeWithResource, DBNStre
     }
 
     protected void filterHiddenChildren(List<DBNNode> nodes) {
-    	IPath projectPath = this.getContentLocationResource().getProject().getLocation();
-    	File hidden = projectPath.append(".hidden").toFile();
-    	if (hidden.isFile()) {
-    		try {
-				BufferedReader reader = new BufferedReader(new FileReader(hidden));
-				final List<String> hiddenElements = reader.lines().collect(Collectors.toList());
-				reader.close();
-				nodes.removeIf(node -> hiddenElements.contains(node.getNodeDisplayName()));
-			} catch (IOException e) {
-				log.error("Can't read .hidden file");
-			}
-    	}
+        IPath projectPath = this.getContentLocationResource().getProject().getLocation();
+        File hidden = projectPath.append(".hidden").toFile();
+        if (hidden.isFile()) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(hidden));
+                final List<String> hiddenElements = reader.lines().collect(Collectors.toList());
+                reader.close();
+                nodes.removeIf(node -> hiddenElements.contains(node.getNodeDisplayName()));
+            } catch (IOException e) {
+                log.error("Can't read .hidden file");
+            }
+        }
     }
     
     protected IResource[] addImplicitMembers(IResource[] members) {
